@@ -4,20 +4,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edit_view_input"
+
+
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Please input city name" />
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/edit_view_input"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="Please input city name"
+            />
+        <Button
+            android:id="@+id/button_query_pm25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_query"
+            />
+
+    </GridLayout>
 
     <TextView
         android:id="@+id/text_view_pm25"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/button_query_pm25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_query" />
+
+
 </LinearLayout>
+
