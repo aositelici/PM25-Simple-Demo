@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void onQueryPM25Click() {
         final String city = cityEditText.getText().toString();
+
         if (!TextUtils.isEmpty(city)) {
             showLoading();
             AirServiceClient.getInstance().requestPM25(city, new Callback<List<PM25>>() {
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showSuccessScreen(Response<List<PM25>> response) {
         hideLoading();
+
         if (response != null) {
             populate(response.body());
         }
@@ -81,8 +84,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void populate(List<PM25> data) {
         if (data != null && !data.isEmpty()) {
-            PM25 pm25 = data.get(0);
-            pm25TextView.setText(pm25.getPositionName() + pm25.getQuality());
+            for(int i=0; i<data.size(); i++) {
+                PM25 pm25 = data.get(i);
+                if(pm25.getPositionName() !=null ) {
+                    pm25TextView.append(pm25.getPositionName() + ": " + pm25.getQuality() + "\r\n");
+                }
+            }
         }
     }
 }
