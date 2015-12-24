@@ -1,6 +1,7 @@
 package com.thoughtworks.myapplication;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -12,16 +13,18 @@ import android.widget.TextView;
 import com.thoughtworks.myapplication.domain.PM25;
 import com.thoughtworks.myapplication.service.AirServiceClient;
 
+import java.io.Serializable;
 import java.util.List;
 
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText cityEditText;
-    private TextView pm25TextView;
+    private TextView errorTextView;
     private ProgressDialog loadingDialog;
 
     @Override
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         cityEditText = (EditText) findViewById(R.id.edit_view_input);
-        pm25TextView = (TextView) findViewById(R.id.text_view_pm25);
+        errorTextView = (TextView) findViewById(R.id.text_view_error);
         loadingDialog = new ProgressDialog(this);
         loadingDialog.setMessage(getString(R.string.loading_message));
 
@@ -45,12 +48,14 @@ public class MainActivity extends AppCompatActivity {
     private void onQueryPM25Click() {
         final String city = cityEditText.getText().toString();
 
+
         if (!TextUtils.isEmpty(city)) {
             showLoading();
             AirServiceClient.getInstance().requestPM25(city, new Callback<List<PM25>>() {
                 @Override
                 public void onResponse(Response<List<PM25>> response, Retrofit retrofit) {
                     showSuccessScreen(response);
+
                 }
 
                 @Override
@@ -65,13 +70,22 @@ public class MainActivity extends AppCompatActivity {
         hideLoading();
 
         if (response != null) {
-            populate(response.body());
+            Intent intent = new Intent();
+
+            //Bundle b=new Bundle();
+            //b.putSerializable("data", response.body());
+            intent.putExtra("data", (Serializable) response.body());
+           // intent.putExtras(b);
+
+            intent.setClass(MainActivity.this, SecondActivity.class);
+            MainActivity.this.startActivity(intent);
+            //populate(response.body());
         }
     }
 
     private void showErrorScreen() {
         hideLoading();
-        pm25TextView.setText(R.string.error_message_query_pm25);
+        errorTextView.setText(R.string.error_message_query_pm25);
     }
 
     private void showLoading() {
@@ -82,14 +96,7 @@ public class MainActivity extends AppCompatActivity {
         loadingDialog.dismiss();
     }
 
-    private void populate(List<PM25> data) {
-        if (data != null && !data.isEmpty()) {
-            for(int i=0; i<data.size(); i++) {
-                PM25 pm25 = data.get(i);
-                if(pm25.getPositionName() !=null ) {
-                    pm25TextView.append(pm25.getPositionName() + ": " + pm25.getQuality() + "\r\n");
-                }
-            }
-        }
-    }
+
+
+
 }
