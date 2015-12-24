@@ -25,7 +25,7 @@
     </GridLayout>
 
     <TextView
-        android:id="@+id/text_view_pm25"
+        android:id="@+id/text_view_error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
