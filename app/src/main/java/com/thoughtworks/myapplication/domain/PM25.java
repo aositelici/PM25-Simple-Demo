@@ -18,11 +18,13 @@ public class PM25 implements Serializable{
     private String pm25;
 
     @SerializedName("time_point")
-    private String timePOint;
+    private String timePoint;
 
     @SerializedName("primary_pollutant")
     private String primaryPollutant;
 
+    @SerializedName("area")
+    private  String area;
 
     public String getPositionName() {
         return positionName;
@@ -58,12 +60,12 @@ public class PM25 implements Serializable{
         this.pm25 = pm25;
     }
 
-    public String getTimePOint() {
-        return timePOint;
+    public String getTimePoint() {
+        return timePoint;
     }
 
-    public void setTimePOint(String timePOint) {
-        this.timePOint = timePOint;
+    public void setTimePoint(String timePoint) {
+        this.timePoint = timePoint;
     }
 
     public String getPrimaryPollutant() {
@@ -72,6 +74,14 @@ public class PM25 implements Serializable{
 
     public void setPrimaryPollutant(String primaryPollutant) {
         this.primaryPollutant = primaryPollutant;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 
 
