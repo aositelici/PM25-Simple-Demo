@@ -1,5 +1,6 @@
 package com.thoughtworks.myapplication;
 
+import android.support.v7.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -25,33 +28,52 @@ import retrofit.Retrofit;
 
 public class SecondActivity extends AppCompatActivity{
 
-    private EditText cityEditText;
-    private TextView pm25TextView;
     private TextView titleTextView;
     private TextView timeTextView;
     private TableLayout detailsTableLayout;
 
     private final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
     private final int MP = ViewGroup.LayoutParams.MATCH_PARENT;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        pm25TextView = (TextView) findViewById(R.id.text_view_pm25);
+        setHome();
+
         titleTextView = (TextView) findViewById(R.id.text_view_title);
         timeTextView = (TextView) findViewById(R.id.text_view_time);
+
         detailsTableLayout = (TableLayout) findViewById(R.id.table_layout_details);
         detailsTableLayout.setStretchAllColumns(true);
+
         List<PM25> data =  (List<PM25>) getIntent().getSerializableExtra("data");
         String area = data.get(0).getArea();
         String time = data.get(0).getTimePoint();
         showTitle(area);
         showTime(time);
         showDetailTable(data);
-
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if(item.getItemId() == android.R.id.home)
+        {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setHome() {
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
 
     private void showDetailTable(List<PM25> data) {
         if (data != null && !data.isEmpty()) {
