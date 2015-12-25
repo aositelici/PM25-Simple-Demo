@@ -2,32 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-
+    android:orientation="vertical"
+    android:background="@drawable/taohua">
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dip">
         <EditText
             android:id="@+id/edit_view_input"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:hint="Please input city name"
-            />
+            android:hint="输入想查询的城市名"
+            android:textColor="#317ef3"
+            android:autoText="true" />
         <Button
             android:id="@+id/button_query_pm25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_query"
-            />
-
+            android:background="#55dae1"
+            android:textColor="#317ef3"/>
     </GridLayout>
 
     <TextView
         android:id="@+id/text_view_error"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="15dip"
+        android:textColor="#317ef3"
+        android:layout_gravity="center"/>
 
 
 
