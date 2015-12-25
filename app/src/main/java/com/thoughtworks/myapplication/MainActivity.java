@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         loadingDialog = new ProgressDialog(this);
         loadingDialog.setMessage(getString(R.string.loading_message));
 
+        clearAll();
+
         findViewById(R.id.button_query_pm25).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,5 +92,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void hideLoading() {
         loadingDialog.dismiss();
+    }
+
+    private void clearAll() {
+        errorTextView.setText("");
     }
 }
