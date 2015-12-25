@@ -10,11 +10,12 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:gravity="center"
-        />
+        android:textColor="#317ef3" />
     <TextView
         android:id="@+id/text_view_time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#317ef3"/>
 
     <TableLayout
         android:id="@+id/table_layout_details"
@@ -22,12 +23,10 @@
         android:layout_height="wrap_content"
         android:stretchColumns="*"
         android:background="#DEDCD2"
-        >
+        android:layout_marginTop="20dip">
         <TableRow
             android:background="#DEDCD2"
-            android:layout_margin="0.5dp"
-
-            >
+            android:layout_margin="0.5dp">
             <TextView
                 android:text="监测点"
                 android:textSize="15dip"
