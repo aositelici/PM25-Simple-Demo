@@ -71,15 +71,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (response != null) {
             Intent intent = new Intent();
-
-            //Bundle b=new Bundle();
-            //b.putSerializable("data", response.body());
             intent.putExtra("data", (Serializable) response.body());
-           // intent.putExtras(b);
-
             intent.setClass(MainActivity.this, SecondActivity.class);
+
             MainActivity.this.startActivity(intent);
-            //populate(response.body());
+
         }
     }
 
@@ -95,8 +91,4 @@ public class MainActivity extends AppCompatActivity {
     private void hideLoading() {
         loadingDialog.dismiss();
     }
-
-
-
-
 }
